@@ -1,0 +1,15 @@
+{
+  "name": "servidor-mvc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "startup.js",
+  "scripts": {
+    "start": "node startup.js"
+  },
+  "keywords": [],
+  "author": "Leonardo G",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
