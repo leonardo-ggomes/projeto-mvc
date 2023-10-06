@@ -19,9 +19,11 @@ class SkinDAO{
 
             const skin = new Skin()
 
-            skin.id = query[index].SKI_ID
-            skin.descricao = query[index].SKI_NOME
-            skin.quantidade = query[index].SKI_DESCRICAO
+            skin.id = query[index].id_skin
+            skin.descricao = query[index].nome_skin
+            skin.quantidade = query[index].descr_skin
+            skin.categoria = query[index].categoria_skin
+            skin.foto1 = query[index].foto1_skin
 
             list_skins.push(skin.toJson())     
         }

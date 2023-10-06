@@ -4,14 +4,14 @@ var connection = mysql.createPool({
   host     : 'localhost',
   user     : 'root',
   password : '',
-  database : 'dbsteam'
+  database : 'bdgl'
 }).promise();
 
 async function selectSkins(){
   const query = await connection.query('SELECT * FROM SKINS')
   return query[0]
 } 
-
+ 
 module.exports = {
   selectSkins
 }
