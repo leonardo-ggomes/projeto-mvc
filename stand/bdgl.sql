@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 27/09/2023 às 12:35
+-- Tempo de geração: 11/10/2023 às 18:23
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -203,6 +203,13 @@ CREATE TABLE `skins` (
   `promocoes_id_promocao` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Despejando dados para a tabela `skins`
+--
+
+INSERT INTO `skins` (`id_skin`, `categoria_skin`, `nome_skin`, `descr_skin`, `genero_skin`, `valor_skin`, `raridade_skin`, `foto1_skin`, `foto2_skin`, `promocoes_id_promocao`) VALUES
+(2, 'Acessório', 'Budega', 'Azul Frufru', '', 50.99, '', 'null', 'null', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -365,7 +372,7 @@ ALTER TABLE `promocoes`
 -- AUTO_INCREMENT de tabela `skins`
 --
 ALTER TABLE `skins`
-  MODIFY `id_skin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_skin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `vendas`
