@@ -1,27 +1,31 @@
-const Db = require("../../repository/database.js")
+const Db = require("../../repository/database.js");
 
 class Skin{
 
-    nome 
-    descricao 
-    raridade 
-
+    #nome 
+    #descricao 
+    #raridade     
+  
     constructor(nome, descricao, raridade){
-        this.nome = nome
-        this.descricao = descricao
-        this.raridade = raridade
+        this.#nome = nome
+        this.#descricao = descricao
+        this.#raridade = raridade
     }
 
-    getAllSkins(){
-        const db = new Db()
-
-        db.getConnection().query("SELECT * FROM SKINS", (err, results, fields) => {
-            console.log(results)
-        })
-
+    get nome(){
+        return this.#nome;
     }
 
-    
+    set nome(valor){
+        this.#nome = valor;
+    }
+
+    toJson(){
+        return {
+            "nome": this.#nome
+        }
+    }
 }
+
 
 module.exports = Skin

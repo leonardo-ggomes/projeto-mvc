@@ -2,20 +2,21 @@ const mysql = require("mysql2")
 
 class Database{
 
-    connection 
+    #connection 
 
     constructor(){
-        this.connection = mysql.createConnection({
+        this.#connection = mysql.createPool({
             host: "localhost",
             user:"root",
-            password:"",
-            database:"DBSTEAM"
-        })
+            password:"root",
+            database:"bdgl"
+        }).promise()
     }
-
-    getConnection(){
-        return this.connection
-    }
+   
+    async selecionarSkins(){
+       const skinsData = await this.#connection.query("select * from skins;")
+       return skinsData[0]
+    } 
 
 }
 

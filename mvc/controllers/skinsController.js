@@ -1,12 +1,11 @@
-const Skin = require("../models/skinModel.js")
+const SkinDAO = require("../../DAO/skinDAO")
 
 module.exports = (app) => {
 
-    app.get("/getSkin", (req, res) => {
-        const skin = new Skin("Chapéu Eldorado","Sei lá",10)
+    app.get("/getSkin", async (req, res) => {
+       const skinDAO = new SkinDAO()
 
-        skin.getAllSkins()    
-        res.send("Nome: "+skin.nome)
+       res.json(await skinDAO.consultarSkins())
     })
 
 }
