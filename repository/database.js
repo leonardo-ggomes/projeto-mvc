@@ -5,6 +5,8 @@ class Database{
     #connection 
 
     constructor(){
+
+        //Configuração do banco
         this.#connection = mysql.createPool({
             host: "localhost",
             user:"root",
