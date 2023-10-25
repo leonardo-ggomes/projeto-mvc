@@ -8,7 +8,7 @@ class Database{
         this.#connection = mysql.createPool({
             host: "localhost",
             user:"root",
-            password:"root",
+            password:"",
             database:"bdgl"
         }).promise()
     }

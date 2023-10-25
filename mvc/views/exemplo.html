@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo</title>
+</head>
+<body>
+    <form action="/registrarskin" method="post">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome"/>
+    </form>
+
+    <script>
+         async function carregarSkin(){
+            const data = await fetch("http://localhost:3000/getSkin")
+            const json = await data.json()
+            const skins = await json
+        
+            document.getElementById("nome").value = skins[0].nome
+        }
+
+        carregarSkin()
+        
+    </script>
+</body>
+</html>
