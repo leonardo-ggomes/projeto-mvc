@@ -36,11 +36,21 @@ module.exports = (app) => {
         
         res.setHeader("Access-Control-Allow-Origin","*")
 
-        console.log(req.body)
+        //Destructuring
+        const { cowboy, turista } = req.body.
 
-        res.send('ok')
+        res.send(cowboy + ""+turista)
 
     })
+
+    app.get("/cupom", (req, res) => {
+        res.setHeader("Access-Control-Allow-Origin","*")
+        
+        res.sendFile(path.resolve("mvc/views/ctrldev/addcupons.html"))
+    })
+
+   
+
 
 
 }

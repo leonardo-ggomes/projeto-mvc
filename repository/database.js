@@ -20,6 +20,13 @@ class Database{
        return skinsData[0]
     } 
 
+    async insertCupom(nome, codigo, validade, valor){
+       const retorno = await this.#connection.execute(`
+        INSERT INTO cupons (codigo_cupon, nome_cupon, validade_cupon, valor_cupom) VALUES
+        ('${codigo}', '${nome}', '${validade}', ${valor});
+      `)
+    }
+
 }
 
 module.exports = Database

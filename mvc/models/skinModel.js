@@ -1,5 +1,3 @@
-const Db = require("../../repository/database.js");
-
 //Representa uma skin do mundo real, concorda?
 class Skin{
 
