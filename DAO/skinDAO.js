@@ -24,6 +24,13 @@ class SkinDAO {
 
         return lista_skins
     }
+
+    async cadastrarSkin(categoria, nome, descricao, genero, valor, raridade, foto1, foto2, promocao){
+        
+       const status = await this.#conexao.insertSkin(categoria, nome, descricao, genero, valor, raridade, foto1, foto2, promocao)
+       console.log("Total de erros em cadastrarSkin: "+status.warningStatus)
+       return status.insertId
+    }
 }
 
 module.exports = SkinDAO

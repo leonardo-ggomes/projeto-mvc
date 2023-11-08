@@ -27,6 +27,19 @@ class Database{
       `)
     }
 
+    async insertSkin(categoria, nome, descricao, genero, valor, raridade, foto1, foto2, promocao){
+        const sql = `
+        insert into skins (categoria_skin, nome_skin, descr_skin,
+            genero_skin, valor_skin, raridade_skin, foto1_skin, foto2_skin,
+            promocoes_id_promocao) 
+            values ('${categoria}','${nome}','${descricao}','${genero}',
+            ${valor}, '${raridade}','${foto1}','${foto2}',${promocao})
+        `
+        const bd = await this.#connection.execute(sql)
+        return bd[0]
+
+    }
+
 }
 
 module.exports = Database
