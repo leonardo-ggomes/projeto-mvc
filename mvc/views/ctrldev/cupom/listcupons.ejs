@@ -67,7 +67,7 @@
                   <div class="col border-end d-flex justify-content-center align-self-center"><%= cupom.Codigo %></div>
                   <div class="col border-end d-flex justify-content-center align-self-center"><%= cupom.validade %></div>
                   <div class="col border-end d-flex justify-content-center align-self-center"><%= cupom.valor %></div>
-                  <div class="col border-end d-flex justify-content-center align-self-center"><button class="btn bg-success"><i class="bi bi-pen"></i>  Update</button></div>
+                  <div class="col border-end d-flex justify-content-center align-self-center"><button onclick="atualizar(<%= cupom.id %>)" class="btn bg-success"><i class="bi bi-pen"></i>  Update</button></div>
                   <div class="col d-flex justify-content-center align-self-center"><button onclick="apagar(<%= cupom.id %>)" class="btn bg-danger"> <i class="bi bi-trash3"></i> Delete</button></div>
               </div>
 
@@ -90,6 +90,10 @@
         console.log(status)
 
         location.reload()
+      }
+
+      function atualizar(id){
+          location.href = "/cupom/alterar/"+id
       }
 
     </script>

@@ -25,6 +25,14 @@ module.exports = (app) => {
         res.render("cupom/listcupons", { cupons: lista_cupons })
     })
 
+    app.get("/cupom/alterar/:id", async (req, res) => {
+        const cupomDAO = new CupomDAO()
+
+        const dtcupom = await cupomDAO.consultarCuponId(req.params.id)
+
+        res.render("cupom/upcupons", { cupom: dtcupom  })
+    })
+
     app.get("/cupons", async (req, res) => {
         
         const cupomDAO = new CupomDAO();
@@ -55,6 +63,19 @@ module.exports = (app) => {
         res.setHeader("Access-Control-Allow-Origin","*")
     
         res.json(await cupomDAO.apagarCupom(req.params.id))
+
+    })
+
+    app.put("/cupom/alterar", async (req, res) => {
+        const cupomDAO = new CupomDAO();
+        res.setHeader("Access-Control-Allow-Origin","*")
+
+        //Destructuring
+        const {nome, codigo, validade, valor, id } = req.body
+
+        const r = await cupomDAO.atualizarCupom(id, nome, codigo, validade,valor)
+
+        res.json({r})
 
     })
 }

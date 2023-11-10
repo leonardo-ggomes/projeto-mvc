@@ -32,6 +32,22 @@ class CupomDAO {
         return lista_cupom
     }
 
+    async consultarCuponId(id) {
+
+        const cupom = await this.#conexao.selecionarCuponId(id)
+              
+        const objcupom = new Cupom()
+
+        objcupom.id = cupom[0].id_cupon
+        objcupom.codCupom = cupom[0].codigo_cupon
+        objcupom.nomeCupom = cupom[0].nome_cupon
+        objcupom.validadeCupom = cupom[0].validade_cupon
+        objcupom.valorCupom = cupom[0].valor_cupom
+      
+
+        return objcupom.toJson()
+    }
+
     registrarCupom(nome, codigo, validade, valor){
 
         const cupom = new Cupom()
@@ -42,6 +58,20 @@ class CupomDAO {
         cupom.valorCupom = valor
 
         this.#conexao.insertCupom(cupom.nomeCupom, cupom.codCupom, cupom.validadeCupom, cupom.valorCupom)
+    }
+
+    async atualizarCupom(id, nome, codigo, validade, valor){
+
+        const cupom = new Cupom()
+
+        cupom.id = id
+        cupom.nomeCupom = nome
+        cupom.codCupom = codigo
+        cupom.validadeCupom = validade
+        cupom.valorCupom = valor
+
+        const dt = await this.#conexao.updateCupom(cupom.codCupom, cupom.nomeCupom, cupom.validadeCupom, cupom.valorCupom, cupom.id)
+        return dt
     }
 
     async apagarCupom(id){
