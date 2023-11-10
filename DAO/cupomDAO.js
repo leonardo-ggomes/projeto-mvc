@@ -9,19 +9,20 @@ class CupomDAO {
         this.#conexao = new Database();
     }
 
-    async consultarCupom() {
+    async consultarCupons() {
 
         const lista_cupom = []
-        const cupoms = await this.#conexao.selecionarCupom()
+        const cupoms = await this.#conexao.selecionarCupons()
 
         if (cupoms) {
             for (const cupom of cupoms) {
                 const objcupom = new Cupom()
 
-                objcupom.codCupom = cupoms.codigo_cupom
-                objcupom.nomeCupom = cupoms.nome_cupom
-                objcupom.validadeCupom = cupoms.validade_cupom
-                objcupom.valorCupom = cupoms.valor_cupom
+                objcupom.id = cupom.id_cupon
+                objcupom.codCupom = cupom.codigo_cupon
+                objcupom.nomeCupom = cupom.nome_cupon
+                objcupom.validadeCupom = cupom.validade_cupon
+                objcupom.valorCupom = cupom.valor_cupom
 
 
                 lista_cupom.push(objcupom.toJson())
@@ -41,6 +42,11 @@ class CupomDAO {
         cupom.valorCupom = valor
 
         this.#conexao.insertCupom(cupom.nomeCupom, cupom.codCupom, cupom.validadeCupom, cupom.valorCupom)
+    }
+
+    async apagarCupom(id){
+     const dados =  await this.#conexao.deleteCupom(id)
+     return dados
     }
 }
 

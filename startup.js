@@ -8,6 +8,7 @@
  */
 const express = require("express")
 
+
 /***
  * 
  * Esse pacotinho também tem uma função, e você precisa fazer o require
@@ -21,6 +22,9 @@ const consign = require("consign")
  * -> express()  <- automaticamente um servidor é criado.
  */
 const app = express()
+
+app.set('view engine', 'ejs')
+app.set('views','mvc/views/ctrldev')
 
 /**
  * Você usa isso para trabalhar com json, caso não seja feita essa configuração

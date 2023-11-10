@@ -56,11 +56,7 @@ module.exports = (app) => {
 
     })
 
-    app.get("/cupom", (req, res) => {
-        res.setHeader("Access-Control-Allow-Origin","*")
-        
-        res.sendFile(path.resolve("mvc/views/ctrldev/addcupons.html"))
-    })
+   
 
    
 

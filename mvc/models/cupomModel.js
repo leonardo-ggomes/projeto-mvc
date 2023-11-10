@@ -1,6 +1,14 @@
 //Representa uma Cupom do mundo real, concorda?
 class Cupom{
 
+    #id
+
+    get id() {
+        return this.#id
+    }
+    set id(value) {
+        this.#id = value
+    }
 
    #codCupom
     get codCupom() {
@@ -45,6 +53,7 @@ class Cupom{
      
     toJson(){
         return {
+            "id": this.#id,
             "nome": this.#nomeCupom,
             "Codigo": this.#codCupom,
             "validade": this.#validadeCupom,

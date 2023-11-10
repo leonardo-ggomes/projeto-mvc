@@ -13,15 +13,31 @@ module.exports = (app) => {
     app.get("/cupom", (req, res) => {
         res.setHeader("Access-Control-Allow-Origin","*")
         
-        res.sendFile(path.resolve("mvc/views/ctrldev/addcupons.html"))
+        res.sendFile(path.resolve("mvc/views/ctrldev/cupom/addcupons.html"))
+    })
+
+    app.get("/cupom/lista", async (req, res) => {
+        res.setHeader("Access-Control-Allow-Origin","*")
+
+        const cupomDAO = new CupomDAO()
+        const lista_cupons = await cupomDAO.consultarCupons()
+   
+        res.render("cupom/listcupons", { cupons: lista_cupons })
+    })
+
+    app.get("/cupons", async (req, res) => {
+        
+        const cupomDAO = new CupomDAO();
+        res.setHeader("Access-Control-Allow-Origin","*")
+
+        res.status(201).json(await cupomDAO.consultarCupons())
+
     })
 
     app.post("/registrarcupom", (req, res) => {
         
         const cupomDAO = new CupomDAO();
         res.setHeader("Access-Control-Allow-Origin","*")
-
-
 
         //Destructuring
         const {txtnomecupom, txtcodcupom, dtval, txtvalorcupom } = req.body
@@ -31,6 +47,14 @@ module.exports = (app) => {
         res.status(201).json({ 
             msg: "ok"
         })
+
+    })
+
+    app.delete("/cupom/apagar/:id", async (req,res) =>{
+        const cupomDAO = new CupomDAO();
+        res.setHeader("Access-Control-Allow-Origin","*")
+    
+        res.json(await cupomDAO.apagarCupom(req.params.id))
 
     })
 }

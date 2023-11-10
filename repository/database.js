@@ -20,6 +20,11 @@ class Database{
        return skinsData[0]
     } 
 
+    async selecionarCupons(){
+        const cuponsData = await this.#connection.query("select * from cupons;")
+        return cuponsData[0]
+     } 
+
     async insertCupom(nome, codigo, validade, valor){
        const retorno = await this.#connection.execute(`
         INSERT INTO cupons (codigo_cupon, nome_cupon, validade_cupon, valor_cupom) VALUES
@@ -39,6 +44,18 @@ class Database{
         return bd[0]
 
     }
+
+    async deleteCupom(id){
+     const sql =   `
+        delete from cupons
+        where id_cupon = ${id};
+        `
+    
+      const dt = await this.#connection.execute(sql)
+      return dt[0]
+    }
+
+
 
 }
 
