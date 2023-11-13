@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/10/2023 às 18:23
+-- Tempo de geração: 10/11/2023 às 19:20
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -68,8 +68,8 @@ CREATE TABLE `cupons` (
 --
 
 INSERT INTO `cupons` (`id_cupon`, `codigo_cupon`, `nome_cupon`, `validade_cupon`, `valor_cupom`) VALUES
-(1, '000', 'sc', '2023-09-05', 0),
-(2, 'PRIME01', 'Desconto de primeiro acesso', '2024-09-06', 15);
+(3, 'Desconto', 'REGENTE ATUALIZADO', '0000-00-00', 500),
+(4, 'BATATA', 'LEO', '2023-11-24', 12);
 
 -- --------------------------------------------------------
 
@@ -161,6 +161,13 @@ CREATE TABLE `personagens` (
   `skins_id_skin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Despejando dados para a tabela `personagens`
+--
+
+INSERT INTO `personagens` (`id_personagem`, `nome_personagem`, `genero_personagem`, `tipo_personagem`, `totalcoin_personagem`, `start_latitude`, `start_longitude`, `skins_id_skin`) VALUES
+(1, 'nileo', 'M', 'Humano', 2500, '33.7367518947601', '132.48511964017715', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -174,7 +181,7 @@ CREATE TABLE `promocoes` (
   `dt_end_promocao` date NOT NULL,
   `descr_promocao` text NOT NULL,
   `ativa_promocao` enum('0','1') NOT NULL DEFAULT '0',
-  `descontos_id_desconto` int(11) NOT NULL
+  `descontos_id_desconto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -200,7 +207,7 @@ CREATE TABLE `skins` (
   `raridade_skin` enum('Comum','Rara','Épica','Lendário') NOT NULL,
   `foto1_skin` varchar(200) NOT NULL,
   `foto2_skin` varchar(200) DEFAULT NULL,
-  `promocoes_id_promocao` int(11) NOT NULL
+  `promocoes_id_promocao` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
@@ -208,7 +215,12 @@ CREATE TABLE `skins` (
 --
 
 INSERT INTO `skins` (`id_skin`, `categoria_skin`, `nome_skin`, `descr_skin`, `genero_skin`, `valor_skin`, `raridade_skin`, `foto1_skin`, `foto2_skin`, `promocoes_id_promocao`) VALUES
-(2, 'Acessório', 'Budega', 'Azul Frufru', '', 50.99, '', 'null', 'null', 1);
+(2, 'Acessório', 'Budega', 'Azul Frufru', '', 50.99, '', 'null', 'null', 1),
+(3, 'Chapéu', 'Geovana', 'Chapéu de Palha', 'Feminino', 10, 'Comum', 'qualquercoisa.png', '', 1),
+(4, 'Acessório', 'Chapeu', 'Bababbabababa', 'Masculino', 100, 'Lendário', '', '', 1),
+(5, 'Mochila', 'Mochila', 'Mochila mochila backpack do gta', 'Masculino', 250, 'Lendário', 'Ativo 2.png', 'Ativo-9.png', 1),
+(6, 'Mochila', 'Mochila BBB', 'Mochila mochila backpack do gta', 'Masculino', 250, 'Lendário', 'Ativo 2.png', 'Ativo-9.png', 1),
+(7, 'Mochila', 'Mochila BBB', 'Mochila mochila backpack do gta', 'Masculino', 250, 'Lendário', 'Ativo 2.png', 'Ativo-9.png', 1);
 
 -- --------------------------------------------------------
 
@@ -220,9 +232,16 @@ CREATE TABLE `vendas` (
   `id_venda` int(11) NOT NULL,
   `hora_venda` time NOT NULL,
   `dia_venda` date NOT NULL,
-  `skins_id_skin` int(11) NOT NULL,
-  `cupons_id_cupon` int(11) NOT NULL
+  `skins_id_skin` int(11) DEFAULT NULL,
+  `cupons_id_cupon` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `vendas`
+--
+
+INSERT INTO `vendas` (`id_venda`, `hora_venda`, `dia_venda`, `skins_id_skin`, `cupons_id_cupon`) VALUES
+(1, '13:10:14', '2023-11-10', 2, NULL);
 
 --
 -- Índices para tabelas despejadas
@@ -330,7 +349,7 @@ ALTER TABLE `coins`
 -- AUTO_INCREMENT de tabela `cupons`
 --
 ALTER TABLE `cupons`
-  MODIFY `id_cupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cupon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `descontos`
@@ -360,7 +379,7 @@ ALTER TABLE `missoes`
 -- AUTO_INCREMENT de tabela `personagens`
 --
 ALTER TABLE `personagens`
-  MODIFY `id_personagem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_personagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `promocoes`
@@ -372,13 +391,13 @@ ALTER TABLE `promocoes`
 -- AUTO_INCREMENT de tabela `skins`
 --
 ALTER TABLE `skins`
-  MODIFY `id_skin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_skin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de tabela `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id_venda` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para tabelas despejadas
@@ -414,20 +433,20 @@ ALTER TABLE `personagens`
 -- Restrições para tabelas `promocoes`
 --
 ALTER TABLE `promocoes`
-  ADD CONSTRAINT `fk_promocoes_descontos1` FOREIGN KEY (`descontos_id_desconto`) REFERENCES `descontos` (`id_desconto`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_promocoes_descontos1` FOREIGN KEY (`descontos_id_desconto`) REFERENCES `descontos` (`id_desconto`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Restrições para tabelas `skins`
 --
 ALTER TABLE `skins`
-  ADD CONSTRAINT `fk_skins_promocoes1` FOREIGN KEY (`promocoes_id_promocao`) REFERENCES `promocoes` (`id_promocao`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_skins_promocoes1` FOREIGN KEY (`promocoes_id_promocao`) REFERENCES `promocoes` (`id_promocao`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Restrições para tabelas `vendas`
 --
 ALTER TABLE `vendas`
-  ADD CONSTRAINT `fk_vendas_cupons1` FOREIGN KEY (`cupons_id_cupon`) REFERENCES `cupons` (`id_cupon`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_vendas_skins` FOREIGN KEY (`skins_id_skin`) REFERENCES `skins` (`id_skin`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_vendas_cupons1` FOREIGN KEY (`cupons_id_cupon`) REFERENCES `cupons` (`id_cupon`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `fk_vendas_skins` FOREIGN KEY (`skins_id_skin`) REFERENCES `skins` (`id_skin`) ON DELETE SET NULL ON UPDATE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
